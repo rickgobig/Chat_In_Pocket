@@ -3,6 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/image": "pages/image.js",
-  "/chat": "pages/chat.js"
+  "/checkout": "pages/checkout.js",
+  "/image": "pages/image.js"
 }

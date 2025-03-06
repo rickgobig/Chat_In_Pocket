@@ -1,31 +1,58 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
   const router = useRouter();
   
   return (
-    <nav className="bg-gray-800 text-white p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link href="/">
-          <a className="text-xl font-bold">AI Platform</a>
+    <nav className="navbar navbar-expand-lg border-bottom mb-4">
+      <div className="container">
+        <Link href="/" className="navbar-brand">
+          AI Platform
         </Link>
-        <div className="space-x-4">
-          <Link href="/chat">
-            <a className={`hover:text-blue-300 ${router.pathname === '/chat' ? 'text-blue-300' : ''}`}>
-              Chat AI
-            </a>
-          </Link>
-          <Link href="/image">
-            <a className={`hover:text-blue-300 ${router.pathname === '/image' ? 'text-blue-300' : ''}`}>
-              Generowanie obrazów
-            </a>
-          </Link>
-          <Link href="/checkout">
-            <a className={`hover:text-blue-300 ${router.pathname === '/checkout' ? 'text-blue-300' : ''}`}>
-              Subskrypcja
-            </a>
-          </Link>
+        
+        <button 
+          className="navbar-toggler" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          data-bs-target="#navbarNav" 
+          aria-controls="navbarNav" 
+          aria-expanded="false" 
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav me-auto">
+            <li className="nav-item">
+              <Link 
+                href="/chat" 
+                className={`nav-link ${router.pathname === '/chat' ? 'active' : ''}`}
+              >
+                Chat AI
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link 
+                href="/image" 
+                className={`nav-link ${router.pathname === '/image' ? 'active' : ''}`}
+              >
+                Generowanie obrazów
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link 
+                href="/checkout" 
+                className={`nav-link ${router.pathname === '/checkout' ? 'active' : ''}`}
+              >
+                Subskrypcja
+              </Link>
+            </li>
+          </ul>
+          
+          <ThemeToggle />
         </div>
       </div>
     </nav>
