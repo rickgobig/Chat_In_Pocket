@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import Head from 'next/head';
 import Link from 'next/link';
+import ThemeToggle from '../components/ThemeToggle';
 
 export default function ImageGenerator() {
   const [prompt, setPrompt] = useState('');
@@ -36,13 +37,17 @@ export default function ImageGenerator() {
         <title>Generowanie obrazów - AI Platform</title>
       </Head>
 
-      <div className="mb-4">
-        <Link href="/">
-          <span className="btn btn-outline-secondary">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <Link 
+          href="/" 
+          className="btn btn-outline-secondary d-inline-flex align-items-center"
+        >
+          <span>
             <i className="bi bi-arrow-left me-2"></i>
             Powrót do strony głównej
           </span>
         </Link>
+        <ThemeToggle />
       </div>
       
       <h1 className="display-4 mb-4">Generowanie obrazów AI</h1>

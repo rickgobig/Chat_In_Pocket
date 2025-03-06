@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Head from 'next/head';
 import Link from 'next/link';
+import ThemeToggle from '../components/ThemeToggle';
 
 export default function Chat() {
   const [prompt, setPrompt] = useState('');
@@ -33,16 +34,20 @@ export default function Chat() {
   return (
     <div className="container py-5">
       <Head>
-        <title>AI Chat - AI Platform</title>
+        <title>Chat AI - AI Platform</title>
       </Head>
 
-      <div className="mb-4">
-        <Link href="/">
-          <span className="btn btn-outline-secondary">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <Link 
+          href="/" 
+          className="btn btn-outline-secondary d-inline-flex align-items-center"
+        >
+          <span>
             <i className="bi bi-arrow-left me-2"></i>
             Powrót do strony głównej
           </span>
         </Link>
+        <ThemeToggle />
       </div>
       
       <div className="d-flex justify-content-between align-items-center mb-4">

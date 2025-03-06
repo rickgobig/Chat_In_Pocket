@@ -1,11 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../styles/globals.css';
 import Layout from '../components/Layout';
 import { useEffect } from 'react';
 
 function MyApp({ Component, pageProps }) {
+  // Inicjalizacja Bootstrap JS po stronie klienta
   useEffect(() => {
-    require('bootstrap/dist/js/bootstrap.bundle.min.js');
+    import('bootstrap/dist/js/bootstrap');
   }, []);
 
   return (

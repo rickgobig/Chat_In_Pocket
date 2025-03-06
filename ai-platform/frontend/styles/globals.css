@@ -1,6 +1,7 @@
 body {
   background-color: #f8f9fa;  /* kolor z Bootstrapa */
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Możemy dodać więcej własnych styli */
@@ -10,4 +11,16 @@ body {
 
 .card:hover {
   transform: translateY(-5px);
+}
+
+/* Dodaj style dla trybu ciemnego */
+[data-bs-theme="dark"] {
+  --bs-body-color: #f8f9fa;
+  --bs-body-bg: #212529;
+  --bs-card-bg: #343a40;
+  --bs-border-color: #495057;
+}
+
+.card, .btn, .form-control, .alert {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
