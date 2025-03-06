@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -6,6 +6,31 @@ import ThemeToggle from '../components/ThemeToggle';
 import Navbar from '../components/Navbar';
 
 export default function ImageGenerator() {
+  useEffect(() => {
+    const handleDragStart = (e) => {
+      e.preventDefault(); // Zablokuje przenoszenie
+    };
+
+    // Funkcja do dodawania nasłuchiwacza do kontenerów
+    const addDragListeners = () => {
+      const containers = document.querySelectorAll('.container, .container.py-4');
+      containers.forEach(container => {
+        container.addEventListener('dragstart', handleDragStart);
+      });
+    };
+
+    // Dodaj nasłuchiwacze po zamontowaniu komponentu
+    addDragListeners();
+
+    // Cleanup
+    return () => {
+      const containers = document.querySelectorAll('.container, .container.py-4');
+      containers.forEach(container => {
+        container.removeEventListener('dragstart', handleDragStart);
+      });
+    };
+  }, []); // Pusty array oznacza, że efekt uruchomi się tylko raz po zamontowaniu komponentu
+  
   const [prompt, setPrompt] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [loading, setLoading] = useState(false);

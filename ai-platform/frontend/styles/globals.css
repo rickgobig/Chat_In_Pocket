@@ -24,3 +24,60 @@ body {
 .card, .btn, .form-control, .alert {
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
+
+/* Style dla nawigacji */
+.navbar {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+[data-bs-theme="dark"] .navbar {
+  background-color: rgba(33, 37, 41, 0.8);
+}
+
+[data-bs-theme="light"] .navbar {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.nav-link {
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+[data-bs-theme="dark"] .nav-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+[data-bs-theme="dark"] .nav-link:hover,
+[data-bs-theme="dark"] .nav-link.active {
+  color: #fff;
+}
+
+[data-bs-theme="light"] .nav-link {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+[data-bs-theme="light"] .nav-link:hover,
+[data-bs-theme="light"] .nav-link.active {
+  color: #000;
+}
+
+.navbar-brand {
+  font-weight: 600;
+}
+
+.hover-effect {
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+.hover-effect:hover {
+  transform: translateY(-2px);
+  background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+.sticky-top {
+  backdrop-filter: blur(10px);
+}
+
+.no-pointer-events {
+  pointer-events: none;
+}

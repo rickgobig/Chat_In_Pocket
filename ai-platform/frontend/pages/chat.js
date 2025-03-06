@@ -4,6 +4,29 @@ import Head from 'next/head';
 import Navbar from '../components/Navbar';
 
 export default function Chat() {
+  const handleDragStart = (e) => {
+    e.preventDefault(); // Zablokuje przenoszenie
+  };
+
+  // Funkcja do dodawania nasłuchiwacza do kontenerów
+  const addDragListeners = () => {
+    const containers = document.querySelectorAll('.container, .container.py-4');
+    containers.forEach(container => {
+      container.addEventListener('dragstart', handleDragStart);
+    });
+  };
+
+  // Dodaj nasłuchiwacze po zamontowaniu komponentu
+  addDragListeners();
+
+  // Cleanup
+  return () => {
+    const containers = document.querySelectorAll('.container, .container.py-4');
+    containers.forEach(container => {
+      container.removeEventListener('dragstart', handleDragStart);
+    });
+  };
+
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
   const [loading, setLoading] = useState(false);

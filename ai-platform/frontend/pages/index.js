@@ -12,6 +12,30 @@ export default function Home() {
     const savedTheme = localStorage.getItem('theme') || 'light';
     setTheme(savedTheme);
     document.documentElement.setAttribute('data-bs-theme', savedTheme);
+
+    const handleDragStart = (e) => {
+      e.preventDefault(); // Zablokuje przenoszenie
+    };
+
+    // Funkcja do dodawania nasłuchiwacza do kontenerów
+    const addDragListeners = () => {
+      const containers = document.querySelectorAll('.container, .container.py-4');
+      containers.forEach(container => {
+        container.addEventListener('dragstart', handleDragStart);
+      });
+    };
+
+    // Dodaj nasłuchiwacze po zamontowaniu komponentu
+    addDragListeners();
+
+    // Cleanup
+    return () => {
+      const containers = document.querySelectorAll('.container, .container.py-4');
+      containers.forEach(container => {
+        container.removeEventListener('dragstart', handleDragStart);
+      });
+    };
+  
   }, []);
 
   // Funkcja przełączająca motyw
@@ -21,6 +45,7 @@ export default function Home() {
     localStorage.setItem('theme', newTheme);
     document.documentElement.setAttribute('data-bs-theme', newTheme);
   };
+
 
   return (
     <>
