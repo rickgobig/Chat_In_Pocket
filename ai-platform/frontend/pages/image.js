@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function ImageGenerator() {
   const [prompt, setPrompt] = useState('');
@@ -30,59 +31,72 @@ export default function ImageGenerator() {
   };
 
   return (
-    <div>
+    <div className="container py-5">
       <Head>
         <title>Generowanie obrazów - AI Platform</title>
       </Head>
+
+      <div className="mb-4">
+        <Link href="/">
+          <span className="btn btn-outline-secondary">
+            <i className="bi bi-arrow-left me-2"></i>
+            Powrót do strony głównej
+          </span>
+        </Link>
+      </div>
       
-      <h1 className="text-3xl font-bold mb-6">Generowanie obrazów AI</h1>
+      <h1 className="display-4 mb-4">Generowanie obrazów AI</h1>
       
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <form onSubmit={handleSubmit} className="mb-6">
-          <div className="mb-4">
-            <label htmlFor="prompt" className="block text-sm font-medium text-gray-700 mb-2">
-              Opisz obraz, który chcesz wygenerować
-            </label>
-            <textarea
-              id="prompt"
-              rows="4"
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Np. Górski krajobraz o zachodzie słońca z jeziorem w dolinie..."
-            />
-          </div>
-          
-          <button
-            type="submit"
-            disabled={loading || !prompt.trim()}
-            className={`w-full py-2 px-4 rounded-md text-white font-medium 
-              ${loading || !prompt.trim() 
-                ? 'bg-gray-400 cursor-not-allowed' 
-                : 'bg-green-500 hover:bg-green-600'}`}
-          >
-            {loading ? 'Generowanie...' : 'Wygeneruj obraz'}
-          </button>
-        </form>
-        
-        {error && (
-          <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-md">
-            {error}
-          </div>
-        )}
-        
-        {imageUrl && (
-          <div className="mt-6">
-            <h2 className="text-xl font-semibold mb-3">Wygenerowany obraz:</h2>
-            <div className="border rounded-md overflow-hidden">
-              <img 
-                src={imageUrl} 
-                alt="Wygenerowany obraz AI" 
-                className="w-full h-auto"
+      <div className="card">
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label htmlFor="prompt" className="form-label h5">
+                Opisz obraz, który chcesz wygenerować
+              </label>
+              <textarea
+                id="prompt"
+                rows="4"
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                className="form-control"
+                placeholder="Np. Górski krajobraz o zachodzie słońca z jeziorem w dolinie..."
               />
             </div>
-          </div>
-        )}
+            
+            <button
+              type="submit"
+              disabled={loading || !prompt.trim()}
+              className="btn btn-primary rounded-pill"
+            >
+              {loading ? (
+                <>
+                  <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  Generowanie...
+                </>
+              ) : 'Generuj obraz'}
+            </button>
+          </form>
+          
+          {error && (
+            <div className="alert alert-danger mt-4">
+              {error}
+            </div>
+          )}
+          
+          {imageUrl && (
+            <div className="mt-4">
+              <h2 className="h4 mb-3">Wygenerowany obraz:</h2>
+              <div className="border rounded overflow-hidden">
+                <img 
+                  src={imageUrl} 
+                  alt="Wygenerowany obraz AI" 
+                  className="w-100 h-auto"
+                />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

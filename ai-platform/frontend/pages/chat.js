@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Chat() {
   const [prompt, setPrompt] = useState('');
@@ -30,55 +31,74 @@ export default function Chat() {
   };
 
   return (
-    <div>
+    <div className="container py-5">
       <Head>
         <title>AI Chat - AI Platform</title>
       </Head>
+
+      <div className="mb-4">
+        <Link href="/">
+          <span className="btn btn-outline-secondary">
+            <i className="bi bi-arrow-left me-2"></i>
+            Powrót do strony głównej
+          </span>
+        </Link>
+      </div>
       
-      <h1 className="text-3xl font-bold mb-6">AI Chat</h1>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="display-4 mb-0">AI Chat</h1>
+      </div>
       
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <form onSubmit={handleSubmit} className="mb-6">
-          <div className="mb-4">
-            <label htmlFor="prompt" className="block text-sm font-medium text-gray-700 mb-2">
-              Twoje pytanie
-            </label>
-            <textarea
-              id="prompt"
-              rows="4"
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Wpisz swoje pytanie..."
-            />
-          </div>
-          
-          <button
-            type="submit"
-            disabled={loading || !prompt.trim()}
-            className={`w-full py-2 px-4 rounded-md text-white font-medium 
-              ${loading || !prompt.trim() 
-                ? 'bg-gray-400 cursor-not-allowed' 
-                : 'bg-blue-500 hover:bg-blue-600'}`}
-          >
-            {loading ? 'Przetwarzanie...' : 'Wyślij'}
-          </button>
-        </form>
-        
-        {error && (
-          <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-md">
-            {error}
-          </div>
-        )}
-        
-        {response && (
-          <div className="mt-6">
-            <h2 className="text-xl font-semibold mb-3">Odpowiedź:</h2>
-            <div className="p-4 bg-gray-100 rounded-md whitespace-pre-wrap">
-              {response}
+      <div className="card">
+        <div className="card-body">
+          <form onSubmit={handleSubmit} className="mb-4">
+            <div className="mb-3">
+              <label htmlFor="prompt" className="form-label">
+                Twoje pytanie
+              </label>
+              <textarea
+                id="prompt"
+                rows="4"
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                className="form-control"
+                placeholder="Wpisz swoje pytanie..."
+              />
             </div>
-          </div>
-        )}
+            
+            <button
+              type="submit"
+              disabled={loading || !prompt.trim()}
+              className={`btn ${loading || !prompt.trim() 
+                ? 'btn-secondary' 
+                : 'btn-primary'} w-100`}
+            >
+              {loading ? (
+                <>
+                  <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  Przetwarzanie...
+                </>
+              ) : 'Wyślij'}
+            </button>
+          </form>
+          
+          {error && (
+            <div className="alert alert-danger mb-4">
+              {error}
+            </div>
+          )}
+          
+          {response && (
+            <div className="mt-4">
+              <h2 className="h4 mb-3">Odpowiedź:</h2>
+              <div className="p-3 bg-light rounded">
+                <pre className="mb-0" style={{ whiteSpace: 'pre-wrap', fontFamily: 'inherit' }}>
+                  {response}
+                </pre>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
