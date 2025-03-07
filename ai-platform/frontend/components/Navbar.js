@@ -11,7 +11,7 @@ export default function Navbar() {
         <Link href="/" className="navbar-brand fs-4 fw-bold ">
         <a 
           href="/" 
-          onClick={(e) => handleNavigation(e, '/')} 
+          onClick={(e) => {e.preventDefault(); router.push('/')}} 
           className="navbar-brand fs-4 fw-bold"
         >
           <span className="me-2">🚀</span> AI Platform
@@ -47,7 +47,7 @@ export default function Navbar() {
                 onClick={(e) => {e.preventDefault(); router.push('/image')}}
                 className={`btn ${router.pathname === '/image' ? 'btn-primary shadow-sm' : 'btn-light hover-effect'} rounded-pill px-4 py-2 fw-medium`}
               >
-                <span>🖼️</span> Generowanie obrazów
+                <span>🖼️</span> Art Create
               </a>
             </li>
             <li className="nav-item mx-2">
@@ -56,7 +56,7 @@ export default function Navbar() {
                 onClick={(e) => {e.preventDefault(); router.push('/checkout')}}
                 className={`btn ${router.pathname === '/checkout' ? 'btn-primary shadow-sm' : 'btn-light hover-effect'} rounded-pill px-4 py-2 fw-medium`}
               >
-                <span>⭐</span> Subskrypcja
+                <span>⭐</span> Pricing
               </a>
             </li>
           </ul>

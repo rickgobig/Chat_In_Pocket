@@ -4,28 +4,28 @@ import Head from 'next/head';
 import Navbar from '../components/Navbar';
 
 export default function Chat() {
-  const handleDragStart = (e) => {
-    e.preventDefault(); // Zablokuje przenoszenie
-  };
+  useEffect(() => {
+    const handleDragStart = (e) => {
+      e.preventDefault();
+    };
 
-  // Funkcja do dodawania nasłuchiwacza do kontenerów
-  const addDragListeners = () => {
-    const containers = document.querySelectorAll('.container, .container.py-4');
-    containers.forEach(container => {
-      container.addEventListener('dragstart', handleDragStart);
-    });
-  };
+    const addDragListeners = () => {
+      const containers = document.querySelectorAll('.container, .container.py-4');
+      containers.forEach(container => {
+        container.addEventListener('dragstart', handleDragStart);
+      });
+    };
 
-  // Dodaj nasłuchiwacze po zamontowaniu komponentu
-  addDragListeners();
+    addDragListeners();
 
-  // Cleanup
-  return () => {
-    const containers = document.querySelectorAll('.container, .container.py-4');
-    containers.forEach(container => {
-      container.removeEventListener('dragstart', handleDragStart);
-    });
-  };
+    return () => {
+      const containers = document.querySelectorAll('.container, .container.py-4');
+      containers.forEach(container => {
+        container.removeEventListener('dragstart', handleDragStart);
+      });
+    };
+  }, []); 
+
 
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
@@ -46,8 +46,8 @@ export default function Chat() {
       });
       setResponse(res.data.response);
     } catch (err) {
-      console.error('Błąd podczas komunikacji z API:', err);
-      setError('Wystąpił błąd podczas komunikacji z API. Spróbuj ponownie później.');
+      console.error('Error during communication with API:', err);
+      setError('An error occurred during communication with API. Please try again later.');
     } finally {
       setLoading(false);
     }
@@ -69,7 +69,7 @@ export default function Chat() {
             <form onSubmit={handleSubmit} className="mb-4">
               <div className="mb-3">
                 <label htmlFor="prompt" className="form-label">
-                  Twoje pytanie
+                  Your question
                 </label>
                 <textarea
                   id="prompt"
@@ -77,7 +77,7 @@ export default function Chat() {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   className="form-control"
-                  placeholder="Wpisz swoje pytanie..."
+                  placeholder="Enter your question..."
                 />
               </div>
               
@@ -91,9 +91,9 @@ export default function Chat() {
                 {loading ? (
                   <>
                     <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                    Przetwarzanie...
+                    Processing...
                   </>
-                ) : 'Wyślij'}
+                ) : 'Send'}
               </button>
             </form>
             
@@ -105,7 +105,7 @@ export default function Chat() {
             
             {response && (
               <div className="mt-4">
-                <h2 className="h4 mb-3">Odpowiedź:</h2>
+                <h2 className="h4 mb-3">Answer:</h2>
                 <div className="p-3 bg-light rounded">
                   <pre className="mb-0" style={{ whiteSpace: 'pre-wrap', fontFamily: 'inherit' }}>
                     {response}

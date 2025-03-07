@@ -25,9 +25,9 @@ export default function ThemeToggle() {
       onClick={toggleTheme}
     >
       {theme === 'light' ? (
-        <><i className="bi bi-moon-fill me-2"></i> Tryb ciemny</>
+        <><i className="bi bi-moon-fill me-2"></i> Dark</>
       ) : (
-        <><i className="bi bi-sun-fill me-2"></i> Tryb jasny</>
+        <><i className="bi bi-sun-fill me-2"></i> Light</>
       )}
     </button>
   );

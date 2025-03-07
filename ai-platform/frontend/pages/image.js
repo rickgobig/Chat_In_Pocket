@@ -8,10 +8,8 @@ import Navbar from '../components/Navbar';
 export default function ImageGenerator() {
   useEffect(() => {
     const handleDragStart = (e) => {
-      e.preventDefault(); // Zablokuje przenoszenie
+      e.preventDefault();
     };
-
-    // Funkcja do dodawania nasłuchiwacza do kontenerów
     const addDragListeners = () => {
       const containers = document.querySelectorAll('.container, .container.py-4');
       containers.forEach(container => {
@@ -19,17 +17,16 @@ export default function ImageGenerator() {
       });
     };
 
-    // Dodaj nasłuchiwacze po zamontowaniu komponentu
     addDragListeners();
 
-    // Cleanup
+
     return () => {
       const containers = document.querySelectorAll('.container, .container.py-4');
       containers.forEach(container => {
         container.removeEventListener('dragstart', handleDragStart);
       });
     };
-  }, []); // Pusty array oznacza, że efekt uruchomi się tylko raz po zamontowaniu komponentu
+  }, []); 
   
   const [prompt, setPrompt] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -50,8 +47,8 @@ export default function ImageGenerator() {
       });
       setImageUrl(res.data.image_url);
     } catch (err) {
-      console.error('Błąd podczas generowania obrazu:', err);
-      setError('Wystąpił błąd podczas generowania obrazu. Spróbuj ponownie później.');
+      console.error('Error during image generation:', err);
+      setError('An error occurred during image generation. Please try again later.');
     } finally {
       setLoading(false);
     }
@@ -60,20 +57,20 @@ export default function ImageGenerator() {
   return (
     <>
       <Head>
-        <title>Generowanie obrazów - AI Platform</title>
-      </Head>
+        <title>Image generation - AI Platform</title>
+      </Head> 
 
       <Navbar />
       
       <div className="container py-4">
-        <h1 className="display-4 mb-4">Generowanie obrazów AI</h1>
+        <h1 className="display-4 mb-4">Image generation</h1>
         
         <div className="card">
           <div className="card-body">
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label htmlFor="prompt" className="form-label h5">
-                  Opisz obraz, który chcesz wygenerować
+                  Describe the image you want to generate
                 </label>
                 <textarea
                   id="prompt"
@@ -81,7 +78,7 @@ export default function ImageGenerator() {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   className="form-control"
-                  placeholder="Np. Górski krajobraz o zachodzie słońca z jeziorem w dolinie..."
+                  placeholder="For example: Mountain landscape with sunset over a lake in the valley..."
                 />
               </div>
               
@@ -93,9 +90,9 @@ export default function ImageGenerator() {
                 {loading ? (
                   <>
                     <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                    Generowanie...
+                    Generating...
                   </>
-                ) : 'Generuj obraz'}
+                ) : 'Generate image'}
               </button>
             </form>
             
@@ -107,11 +104,11 @@ export default function ImageGenerator() {
             
             {imageUrl && (
               <div className="mt-4">
-                <h2 className="h4 mb-3">Wygenerowany obraz:</h2>
+                <h2 className="h4 mb-3">Generated image:</h2>
                 <div className="border rounded overflow-hidden">
                   <img 
                     src={imageUrl} 
-                    alt="Wygenerowany obraz AI" 
+                    alt="Generated image" 
                     className="w-100 h-auto"
                   />
                 </div>
