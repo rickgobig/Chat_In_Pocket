@@ -37,19 +37,19 @@ export default function Checkout() {
   const plans = [
     {
       name: 'Basic',
-      price: 9900, 
+      price: 900, 
       description: 'Basic access to AI features',
       features: ['Access to AI chat', '10 generated images per month']
     },
     {
       name: 'Premium',
-      price: 14900, 
+      price: 2900, 
       description: 'Extended access to AI features',
       features: ['Unlimited access to AI chat', '50 generated images per month', 'Priority support']
     },
     {
       name: 'Business',
-      price: 19900, 
+      price: 9900, 
       description: 'Full access for businesses',
       features: ['Unlimited access to all features', 'Dedicated support', 'API for developers']
     }
@@ -106,7 +106,7 @@ export default function Checkout() {
               <div className="card h-100">
                 <div className="card-body d-flex flex-column">
                   <h2 className="card-title h3">{plan.name}</h2>
-                  <p className="display-6 mb-3">{(plan.price / 100).toFixed(2)} PLN<small className="text-muted fs-6">/month</small></p>
+                  <p className="display-6 mb-3">{(plan.price / 100 + 0.99).toFixed(2)} $<small className="text-muted fs-6">/month</small></p>
                   <p className="card-text text-muted mb-3">{plan.description}</p>
                   
                   <ul className="list-unstyled mb-4">
