@@ -56,7 +56,7 @@ Here are some screenshots of the application:
 
 ![Art_create](https://i.imgur.com/5q37TaB.png)
 
-![Pricing](https://i.imgur.com/kMBJXqY.png)
+![Pricing](https://i.imgur.com/IsS8ASv.png)
 
 ## Contributing
 
